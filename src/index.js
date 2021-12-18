@@ -1,13 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from "react-router-dom";
 import './index.css';
 import App from './App';
+import {store} from './store'
+
+import {Provider , useDispatch} from 'react-redux';
+
 import reportWebVitals from './reportWebVitals';
 
+
+store.subscribe(()=> console.log(store.getState()));
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+<Provider store={store}>
+<React.StrictMode >
+    <Router>
+      <App />
+    </Router>
+  </React.StrictMode>
+</Provider>,
+
   document.getElementById('root')
 );
 
