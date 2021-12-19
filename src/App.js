@@ -17,7 +17,7 @@ function App() {
     <h1>abs</h1>
     <nav>
         <Link to="/">Products</Link>
-        <Link to="/cart">Cart</Link>
+        
     </nav>
     <Routes>
         <Route exact path="/" element={<Products />}>
