@@ -24,7 +24,7 @@ export const Card = ()=>{
          return(
             <div className={classes.card}>
             <h1>{product.name}</h1>
-             <p><button onClick={()=>(dispatch(cartAdd(product.id)))}>Add to Cart</button></p>
+             <p><button onClick={()=>(dispatch(cartAdd(product.id,1,0)))}>Add to Cart</button></p>
             </div>
          )
      })
