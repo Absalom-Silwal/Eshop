@@ -1,29 +1,50 @@
-import React from "react";
+
 import {
   Route,
   Switch,
   Routes,
   Link,
 } from "react-router-dom";
-
+import { useSelector, useDispatch, connect  } from 'react-redux';
+import axios from 'axios' 
+import React, { Component ,useEffect } from "react";
 
 import Cart from "./Cart";
 import Products from "./Product";
+import {fetchData} from './action'
 
 
 function App() {
+  const dispatch = useDispatch();
+  const fetchProducts = async ()=>{
+      const response = await axios
+      .get('https://electronic-ecommerce.herokuapp.com/api/v1/product')
+      .catch((err)=>{
+          console.log('Err',err)
+      });
+      
+      dispatch(fetchData(response.data))
+  };
+  useEffect(() => {
+      fetchProducts();
+     
+  }, [])
+
   return (
     <div>
     <h1>abs</h1>
     <nav>
         <Link to="/">Products</Link>
+        <Link to="/cart">Cart</Link>
         
     </nav>
     <Routes>
         <Route exact path="/" element={<Products />}>
          
         </Route>
-        
+        <Route exact path="/cart" element={<Cart />}>
+         
+         </Route>
        
       </Routes>
      
