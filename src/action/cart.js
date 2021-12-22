@@ -19,19 +19,17 @@ export const totalSum =(price)=>{
         price:price
     })
 }
-export const increment = (productId,productStock,productPrice)=>{
+export const increment = (productId,list)=>{
     return({
         type:'increment',
         productId:productId,
-        productStock:productStock,
-        productPrice:productPrice
+        list:list
     })
 }
-export const decrement = (productId,productPrice)=>{
+export const decrement = (productId,list)=>{
     return({
         type:'decrement',
-        productId:productId,
-        productPrice:productPrice
+        list:list
     })
 }
 export const totalCost = (totalPrice)=>{

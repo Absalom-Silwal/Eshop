@@ -32,10 +32,10 @@ function App() {
 
   return (
     <div>
-    <h1>abs</h1>
+    
     <nav>
         <Link to="/">Products</Link>
-        <Link to="/cart">Cart</Link>
+        <Link to="/cart"><button>Cart</button></Link>
         
     </nav>
     <Routes>

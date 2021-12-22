@@ -1,4 +1,3 @@
-
 export const fetchData = (Products) =>{ 
 
     return({
@@ -7,4 +6,3 @@ export const fetchData = (Products) =>{
     })
     
     }
-

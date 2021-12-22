@@ -42,13 +42,14 @@ export const cart = (state=initState,action)=>{
             })}
                 break;
         case 'increment':
-            console.log(state.cartadd[0],action.productId)
+            console.log(state.cartadd[0],action.productId,action.list)
             
                return {...state,cartadd:state.cartadd.map((product)=>{
                 
                 if(product.productId==action.productId){
-                    const amount = Number(action.productPrice.slice(1,))
-                    if(product.quantity<=action.productStock){
+                    const amount = Number(action.list[product.productId].price.slice(1,))*100
+                    console.log(amount)
+                    if(product.quantity<=action.list[product.productId].stock){
                         
                         return {productId:product.productId,quantity:product.quantity+1,amount:(product.quantity+1)*amount}
                     }else{
@@ -56,7 +57,8 @@ export const cart = (state=initState,action)=>{
                     }
                 }
                    else{
-                    return {productId:product.productId,quantity:product.quantity,amount:0}
+                    const amount = Number(action.list[product.productId].price.slice(1,))*100
+                    return {productId:product.productId,quantity:product.quantity,amount:product.quantity*amount}
                    }
                })}
                break;
@@ -66,7 +68,7 @@ export const cart = (state=initState,action)=>{
                    return {...state,cartadd:state.cartadd.map((product)=>{
                     
                        if(product.productId==action.productId){
-                        const amount = Number(action.productPrice.slice(1,))
+                        const amount = Number(action.list[product.productId].price.slice(1,))*100
                            if(product.quantity>0){
                             return {productId:product.productId,quantity:product.quantity-1,amount:(product.quantity-1)*amount}
                            }else{
@@ -75,7 +77,8 @@ export const cart = (state=initState,action)=>{
                            
                        }
                        else{
-                        return {productId:product.productId,quantity:product.quantity,amount:0}
+                        const amount = Number(action.list[product.productId].price.slice(1,))*100
+                        return {productId:product.productId,quantity:product.quantity,amount:product.quantity*amount}
                        }
                    })}
                    break;

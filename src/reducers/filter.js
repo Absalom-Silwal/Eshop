@@ -11,9 +11,10 @@ const Filter = (state=initState,action)=>{
         case 'applyFilter':
             return {...state,choice:action.choice,filter:true}
             break;
-            case 'removeFilter':
-                return {...state,choice:action.choice,filter:false}
-                break;
+        case 'removeFilter':
+            return {...state,choice:action.choice,filter:false}
+            break;
+        
         default:
             return state
             break;

@@ -4,6 +4,7 @@ import { cartRemove, price } from "./action/cart";
 import { Component ,useEffect } from "react";
 import { increment,decrement,totalCost } from "./action/cart";
 import { cartAdd } from "./action/cart";
+import classes from './cart.module.css'
 
 
 const Cart = () => {
@@ -11,14 +12,16 @@ const Cart = () => {
   let totalSum = 0;
   const crt = useSelector(state => state.cart.cartadd)
   const cartList =()=>{return(crt)}
+  const totalCartAmount = useSelector(state=>state.cart.totalAmount)
+  const totalItem = crt.length
   const renderList = useSelector(state => state.fetchData.products.data.product)
- 
+ console.log(crt.length)
  
  const total =()=> crt.map((product)=>{
  totalSum = totalSum+product.amount
  return dispatch(totalCost(totalSum));
  })
-console.log(totalSum)
+
 
   useEffect(() => {
     
@@ -26,25 +29,45 @@ console.log(totalSum)
     
    
 }, [crt])
+
   
   const rendercartList = cartList().map((cart,pos)=>{
     
    if(typeof(cart.productId)== "number"){
    console.log(pos,cart,renderList[cart.productId].stock)
-
+   const product = renderList[cart.productId].image
+   console.log(product)
+    const pic = `https://electronic-ecommerce.herokuapp.com/${product}`
     return(
-      <div id={pos}>
-      <div >
-        <button onClick={()=>{dispatch(cartRemove(cart.productId,pos))}}>remove</button>
+     
+      
+    <div  className={classes.Cart_Items}>
+          <div className={classes.image_box}>
+      <img src={pic} style={{ height:'120px' }} />
       </div>
-      <div>
-      <p>{renderList[cart.productId-1].name}</p>
+      <div className={classes.about}>
+      <h1 className={classes.title}>{renderList[cart.productId-1].name}</h1>
+      <h3 className={classes.subtitle}>Rs {renderList[cart.productId-1].price.slice(1,)}</h3>
+      
       </div>
-      <button onClick={()=>{dispatch(increment(cart.productId,renderList[cart.productId-1].stock,renderList[cart.productId-1].price))}}>+</button>
-      <p>{cart.quantity}</p>
-      <button onClick={()=>{dispatch(decrement(cart.productId,renderList[cart.productId-1].price))}}>-</button>
-       <div><p>{cart.amount}</p></div> 
+      <div className={classes.counter}>
+        
+        <div classNsme={classes.btn} onClick={()=>{dispatch(increment(cart.productId,renderList))}}>+</div>
+        <div className={classes.count}>{cart.quantity}</div>
+        <div className={classes.btn} onClick={()=>{dispatch(decrement(cart.productId,renderList))}}>-</div>
+ 
       </div>
+      <div classNane={classes.prices}>
+        <div className={classes.amount}>Rs {cart.amount}</div>
+        
+        <div className={classes.remove} onClick={()=>{dispatch(cartRemove(cart.productId,pos))}}><u>Remove</u></div>
+      </div>
+    </div>
+    
+
+
+     
+      
     )
 
    }
@@ -52,17 +75,53 @@ console.log(totalSum)
    
   
   })
-
-  return (
-    <div>
-      
-   
+  if(crt.length>0){
+    return(
+      <div className={classes.body}>
+    <div className={classes.Cart_Container}>
+      <div className={classes.Header}>
+        <h3 className={classes.Heading}>Shopping Cart</h3>
+        <h5 className={classes.Action}>Remove all</h5>
+      </div>
+      <div>
+        <>
+          {rendercartList}
+        </>
+      </div>
     
-    <>
-      {rendercartList}
-    </>
+    
     </div>
-  );
+    
+    <div className={classes.checkout}>
+    <div className={classes.total}>
+    <div>
+    <div className={classes.Subtotal}>Sub-Total</div>
+    <div className={classes.items}>`{totalItem} Items`</div>
+    </div>
+    <div className={classes.total_amount}>Rs {totalCartAmount}</div>
+    </div>
+    <button className={classes.button}>Checkout</button>
+    </div>
+    
+    </div> 
+      )
+    
+
+    }
+    else{
+      return(<div>
+           <p>Back to product</p>
+      </div>
+       
+      )
+      
+    
+  }
+
+  
+       
+     
+ 
 };
 
 export default Cart;

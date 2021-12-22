@@ -1,5 +1,3 @@
-
-
 export const applyFilter = (choice)=>{
     return(
         {
