@@ -2,9 +2,10 @@ import React from "react";
 import { useSelector , useDispatch } from "react-redux";
 import { cartRemove, price } from "./action/cart";
 import { Component ,useEffect } from "react";
-import { increment,decrement,totalCost } from "./action/cart";
+import { increment,decrement,totalCost,cartRemoveall } from "./action/cart";
 import { cartAdd } from "./action/cart";
 import classes from './cart.module.css'
+import {  Link } from 'react-router-dom'
 
 
 const Cart = () => {
@@ -32,7 +33,7 @@ const Cart = () => {
 
   
   const rendercartList = cartList().map((cart,pos)=>{
-    
+  console.log(pos)
    if(typeof(cart.productId)== "number"){
    console.log(pos,cart,renderList[cart.productId].stock)
    const product = renderList[cart.productId].image
@@ -81,7 +82,7 @@ const Cart = () => {
     <div className={classes.Cart_Container}>
       <div className={classes.Header}>
         <h3 className={classes.Heading}>Shopping Cart</h3>
-        <h5 className={classes.Action}>Remove all</h5>
+        
       </div>
       <div>
         <>
@@ -100,7 +101,7 @@ const Cart = () => {
     </div>
     <div className={classes.total_amount}>Rs {totalCartAmount}</div>
     </div>
-    <button className={classes.button}>Checkout</button>
+    <Link exact to="/checkout"><button className={classes.button} onClick={()=>{dispatch(cartRemoveall())}}>Checkout</button></Link>
     </div>
     
     </div> 

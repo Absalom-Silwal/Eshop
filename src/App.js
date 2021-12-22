@@ -12,7 +12,7 @@ import React, { Component ,useEffect } from "react";
 import Cart from "./Cart";
 import Products from "./Product";
 import {fetchData} from './action'
-import {Checkout} from  './checkout'
+import {Checkout} from  './Checkout'
 
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
     <nav>
         <Link to="/">Products</Link>
         <Link to="/cart">Cart</Link>
-        <Link to="/checkout">checkout</Link>
+        
         
     </nav>
     <Routes>

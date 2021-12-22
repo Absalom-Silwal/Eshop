@@ -1,15 +1,17 @@
 import { useSelector } from "react-redux";
-const cartaddList = [] 
+let cartaddList = [] 
 
 const initState = {
     cartadd :[{
         productId:'',
         quantity:1,
         amount:0,
+        addTOCart:false
     }
         
     ],
     totalAmount:0,
+    redirect:false
 
 
 };
@@ -24,14 +26,23 @@ export const cart = (state=initState,action)=>{
     switch (action.type) {
         
         case 'cartadd':
+            console.log(cartaddList)
             const cartadd = {
                 productId:action.productid,
                 quantity:action.quantity,
-                amount:action.amount
+                amount:action.amount,
+                
             }
-            cartaddList.push(cartadd)
+           console.log(action.productObj)
+            if(cartaddList.includes(action.obj)){
+                return {...state,cartadd:cartaddList,totalAmount:0}  
+            }
+            else{
+                cartaddList.push(cartadd)
             
-            return {...state,cartadd:cartaddList,totalAmount:0}
+                return {...state,cartadd:cartaddList,totalAmount:0}
+            }
+            
             break;
         case 'cartremove':
            console.log(state.cartadd)
@@ -83,10 +94,13 @@ export const cart = (state=initState,action)=>{
                    })}
                    break;
     
-                break;
+                
         case 'totalCost':
             return {...state,totalAmount:action.totalSum}
-            break;    
+            break; 
+        case 'cartremoveall':
+            cartaddList=[]
+            return {...state,cartadd:cartaddList} 
         default:
             return state
             break;

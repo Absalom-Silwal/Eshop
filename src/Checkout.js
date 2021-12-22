@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import { TextField } from './textField';
+import { TextField } from './textfield';
 import * as Yup from 'yup';
 
 export const Checkout = () => {
@@ -38,8 +38,8 @@ export const Checkout = () => {
             <TextField label="Name" name="Name" type="text" />
             
             <TextField label="Billing_Address" name="Billing_Address" type="text" />
-            <TextField label="Delivery_Address" name="delivery_Address" type="password" />
-            <TextField label="Telephone_No" name="Telephone_No" type="password" />
+            <TextField label="Delivery_Address" name="delivery_Address" type="text" />
+            <TextField label="Telephone_No" name="Telephone_No" type="text" />
             
             <button  >Continue Checkout</button>
           </Form>

@@ -1,8 +1,8 @@
-import React, { Component ,useEffect } from "react";
+import React from "react";
 
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch, connect  } from 'react-redux';
-import {fetchData} from './action'
+
+import {  useDispatch   } from 'react-redux';
+
 import {applyFilter,removeFilter} from './action/filter'
 import {Card} from './card'
 import classes from './card.module.css'
@@ -12,6 +12,7 @@ import classes from './card.module.css'
 const Products = () =>{
     
     const dispatch = useDispatch();
+   
     
     
     return(

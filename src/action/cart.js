@@ -1,9 +1,10 @@
-export const cartAdd = (productid,quantity,amount)=>{
+export const cartAdd = (productid,quantity,amount,productObj)=>{
     return{
         type:'cartadd',
         productid:productid,
         quantity:quantity,
-        amount:amount
+        amount:amount,
+        productObj : productObj
     }
 }
 export const cartRemove = (productid,pos)=>{
@@ -39,4 +40,10 @@ export const totalCost = (totalPrice)=>{
             totalSum:totalPrice
         }
     )
+}
+export const cartRemoveall = ()=>{
+    return{
+        type:'cartremoveall',
+        
+    }
 }
