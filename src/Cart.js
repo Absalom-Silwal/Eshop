@@ -33,7 +33,7 @@ const Cart = () => {
 
   
   const rendercartList = cartList().map((cart,pos)=>{
-  console.log(pos)
+  console.log(pos,cart.productId)
    if(typeof(cart.productId)== "number"){
    console.log(pos,cart,renderList[cart.productId].stock)
    const product = renderList[cart.productId].image

@@ -30,6 +30,7 @@ export const increment = (productId,list)=>{
 export const decrement = (productId,list)=>{
     return({
         type:'decrement',
+        productId:productId,
         list:list
     })
 }
