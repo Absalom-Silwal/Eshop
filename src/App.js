@@ -8,6 +8,7 @@ import {
 import { useSelector, useDispatch, connect  } from 'react-redux';
 import axios from 'axios' 
 import React, { Component ,useEffect } from "react";
+import  icon  from "./shopping-cart-icon.png";
 
 import Cart from "./Cart";
 import Products from "./Product";
@@ -16,6 +17,7 @@ import {Checkout} from  './Checkout'
 
 
 function App() {
+  console.log(icon)
   const dispatch = useDispatch();
   const fetchProducts = async ()=>{
       const response = await axios
@@ -35,8 +37,8 @@ function App() {
     <div>
     
     <nav>
-        <Link to="/">Products</Link>
-        <Link to="/cart">Cart</Link>
+        <Link to="/"><p style={{padding:'3px', textDecoration:'none'}}>Products</p></Link>
+        <Link to="/cart"><img src={icon} style={{ height:'30px',width:'40px',float:'right',padding:'5px' }}/></Link>
         
         
     </nav>

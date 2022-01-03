@@ -8,53 +8,64 @@ export let Card = ()=>{
    const productList  = useSelector(state => state.fetchData.products)
    const fltr = useSelector(state=>state.filter.filter)
    const choice= useSelector(state =>state.filter.choice )
-   console.log(productList)
+    const cartProducts = useSelector(state=>state.cart)
+
   
   
-   
+   console.log()
    return(
       <div>
        {(productList.length===0)?(
             <div>loading</div>
          ):(
-            <div >
-               {(!fltr)?(
-                  <div className={classes.card_list}>
-                  {productList.data.product.map((product,pos)=>{
-                     const pic = `https://electronic-ecommerce.herokuapp.com/${product.image}`
-                        return(
-                        <div className={classes.card}>
-                        <img src={pic} alt="Denim Jeans" />
-                        <h1>{product.name}</h1>
-                        <p className={classes.price}>Rs {Number(product.price.slice(1,))*100}</p>
-                        <Link exact to="/cart"><p><button onClick={()=>(dispatch(cartAdd(product.id,1,0)))}>Add to Cart</button></p></Link>
+            <div>
+               {productList.data.product.map((product)=>{
+                  return(
+                     <div>
+                     {
+                     (cartProducts.cartadd.length===0)?(
+                        <div>
+                           {product.name}
                         </div>
-                        
-                        )}
-                        )}
+                     ):(
+                        <div>
+                        {
+                           cartProducts.cartadd.map((cartProduct)=>{
+                              return(
+                                 <div>
+                                    {
+                                       (product.id===cartProduct)?(
+                                          <div>
+                                             <p>already added</p>
+                                             
+                                          </div>
+                                       ):(
+                                          <div>
+                                          <p>add to cart</p>
+
+                                          </div>
+                                       )
+                                    }
+                                 </div>
+                              )
+                           })
+                        }
+                     </div>
+                     )
+                  }
                   </div>
-               ):(<div className={classes.card_list}>
-                  {productList.data.product.filter((product)=>product.category[1]===choice).map((product,pos)=>{
-                     const pic = `https://electronic-ecommerce.herokuapp.com/${product.image}`
-                        return(
-                           <div className={classes.card}>
-                           <img src={pic} alt="Denim Jeans" />
-                           <h1>{product.name}</h1>
-                           <p className={classes.price}>Rs{Number(product.price.slice(1,))*100}</p>
-                           <Link exact to="/cart"><p><button onClick={()=>(dispatch(cartAdd(product.id,1,0)))}>Add to Cart</button></p></Link>
-                           </div>
-                        )
-                        
-                        
-                     })}
-               </div>)}
-                
+                    
+                  )
+               })
+            }
             </div>
-               
-            
-         )}
-      </div>
+         )
+       }
+       </div>
    )
+            
+      
+   
             
          
 

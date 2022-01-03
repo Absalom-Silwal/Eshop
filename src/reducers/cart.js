@@ -2,14 +2,7 @@ import { useSelector } from "react-redux";
 let cartaddList = [] 
 
 const initState = {
-    cartadd :[{
-        productId:'',
-        quantity:1,
-        amount:0,
-        addTOCart:false
-    }
-        
-    ],
+    cartadd :[],
     totalAmount:0,
     redirect:false
 
@@ -31,17 +24,14 @@ export const cart = (state=initState,action)=>{
                 productId:action.productid,
                 quantity:action.quantity,
                 amount:action.amount,
-                
+                addTOCart:true
             }
-           console.log(action.productObj)
-            if(cartaddList.includes(action.obj)){
-                return {...state,cartadd:cartaddList,totalAmount:0}  
-            }
-            else{
+           
+            
                 cartaddList.push(cartadd)
             
                 return {...state,cartadd:cartaddList,totalAmount:0}
-            }
+            
             
             break;
         case 'cartremove':
@@ -53,7 +43,7 @@ export const cart = (state=initState,action)=>{
             })}
                 break;
         case 'increment':
-            console.log(state.cartadd[0],action.productId,action.list)
+            
             
                return {...state,cartadd:state.cartadd.map((product)=>{
                 
@@ -74,7 +64,7 @@ export const cart = (state=initState,action)=>{
                })}
                break;
                case 'decrement':
-                console.log(state.cartadd[0],action.productId)
+               
                 
                    return {...state,cartadd:state.cartadd.map((product)=>{
                     
