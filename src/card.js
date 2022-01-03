@@ -9,10 +9,19 @@ export let Card = ()=>{
    const fltr = useSelector(state=>state.filter.filter)
    const choice= useSelector(state =>state.filter.choice )
     const cartProducts = useSelector(state=>state.cart)
-
-  
-  
-   console.log()
+   const cartList = useSelector(state=>state.cart.cartList)
+   console.log(cartList)
+   let check =(id)=> cartList.find(cartid=>cartid===id);
+   let checkCart =(id)=>{
+      if(check(id)===id){
+         return true
+      }else{
+         return false
+      }
+   } 
+     
+   console.log(checkCart(2))
+         
    return(
       <div>
        {(productList.length===0)?(
@@ -20,35 +29,38 @@ export let Card = ()=>{
          ):(
             <div>
                {productList.data.product.map((product)=>{
+                  const pic = `https://electronic-ecommerce.herokuapp.com/${product.image}`
+                  console.log(checkCart(product.id))
                   return(
-                     <div>
+                     <div >
                      {
                      (cartProducts.cartadd.length===0)?(
-                        <div>
-                           {product.name}
+                        <div className={classes.card}>
+                           <img src={pic} alt="Denim Jeans" />
+                           <h1>{product.name}</h1>
+                           <p className={classes.price}>Rs {Number(product.price.slice(1,))*100}</p>
+                           <Link exact to="/cart"><p><button onClick={()=>(dispatch(cartAdd(product.id,1,0)))}>Add to Cart</button></p></Link>
                         </div>
                      ):(
                         <div>
                         {
-                           cartProducts.cartadd.map((cartProduct)=>{
-                              return(
-                                 <div>
-                                    {
-                                       (product.id===cartProduct)?(
-                                          <div>
-                                             <p>already added</p>
-                                             
-                                          </div>
-                                       ):(
-                                          <div>
-                                          <p>add to cart</p>
-
-                                          </div>
-                                       )
-                                    }
-                                 </div>
-                              )
-                           })
+                           (
+                              checkCart(product.id)
+                           )?(
+                              <div className={classes.card}>
+                                 <img src={pic} alt="Denim Jeans" />
+                                 <h1>{product.name}</h1>
+                                 <p className={classes.price}>Rs {Number(product.price.slice(1,))*100}</p>
+                                 <p>already added</p>
+                        </div>
+                           ):(
+                              <div className={classes.card}>
+                                 <img src={pic} alt="Denim Jeans" />
+                                 <h1>{product.name}</h1>
+                                 <p className={classes.price}>Rs {Number(product.price.slice(1,))*100}</p>
+                                 <Link exact to="/cart"><p><button onClick={()=>(dispatch(cartAdd(product.id,1,0)))}>Add to Cart</button></p></Link>
+                              </div>
+                           )
                         }
                      </div>
                      )

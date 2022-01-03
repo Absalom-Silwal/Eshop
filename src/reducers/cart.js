@@ -1,7 +1,9 @@
 import { useSelector } from "react-redux";
 let cartaddList = [] 
+let cartList = []
 
 const initState = {
+    cartList:[],
     cartadd :[],
     totalAmount:0,
     redirect:false
@@ -27,18 +29,19 @@ export const cart = (state=initState,action)=>{
                 addTOCart:true
             }
            
-            
+                cartList.push(action.productid)
                 cartaddList.push(cartadd)
             
-                return {...state,cartadd:cartaddList,totalAmount:0}
+                return {...state,cartList:cartList,cartadd:cartaddList,totalAmount:0}
             
             
             break;
         case 'cartremove':
            console.log(state.cartadd)
+           cartList.splice(action.pos,1)
            cartaddList.splice(action.pos,1)
             
-            return {...state,cartadd:state.cartadd.filter((currentProduct)=>{
+            return {...state,cartList:cartList,cartadd:state.cartadd.filter((currentProduct)=>{
                 return currentProduct.productId !== action.productid       
             })}
                 break;
