@@ -23,11 +23,11 @@ export let Card = ()=>{
    console.log(checkCart(2))
          
    return(
-      <div>
+      <div >
        {(productList.length===0)?(
             <div>loading</div>
          ):(
-            <div className={classes.card}>
+            <div className={classes.card_list}>
                {productList.data.product.map((product)=>{
                   const pic = `https://electronic-ecommerce.herokuapp.com/${product.image}`
                   console.log(checkCart(product.id))
